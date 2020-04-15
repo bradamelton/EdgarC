@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace EdgarC
 {
@@ -16,8 +17,11 @@ namespace EdgarC
 
             var downloader = new Downloader(new ConfigurationAdapter());
 
-            downloader.GetFormList(2020, 2).Wait();
+            var results = downloader.GetFormList(2020, 2).Result;
 
+            results.Select(r => r.CompanyName).Distinct().OrderBy(c => c).ToList().ForEach(c => Console.WriteLine($"{c}"));
+
+            //foreach (var r in results) { Console.WriteLine($"result: {r}"); }
         }
     }
 }
