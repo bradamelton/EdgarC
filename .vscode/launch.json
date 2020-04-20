@@ -12,9 +12,9 @@
 			"program": "${workspaceFolder}/bin/Debug/netcoreapp2.1/EdgarC.dll",
 			"args": [],
 			"cwd": "${workspaceFolder}",
-			"console":"integratedTerminal",
+			"console": "integratedTerminal",
 			"stopAtEntry": false,
-			"internalConsoleOptions":"neverOpen"
+			"internalConsoleOptions": "neverOpen"
 		},
 		{
 			"name": ".NET Core Attach",

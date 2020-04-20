@@ -16,7 +16,7 @@ namespace EdgarC
             {
                 var docNum = "";
 
-                var s = Path.LastIndexOf("/");
+                var s = Path.LastIndexOf("/") + 1;
                 var e = Path.LastIndexOf(".");
 
                 if (s >= 0 && e > s)
@@ -38,7 +38,7 @@ namespace EdgarC
             return new Company()
             {
                 SECNumber = SECNumber,
-                    Name = CompanyName
+                Name = CompanyName
             };
         }
     }

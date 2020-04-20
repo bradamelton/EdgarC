@@ -1,9 +1,12 @@
 using System;
 using DBu;
 
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace EdgarC
 {
     [DatabaseName("EdgarC")]
+    [Table("Form")]
     public class Form : DBuClass
     {
         public string SECDocumentNumber { get; set; }
