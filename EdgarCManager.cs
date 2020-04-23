@@ -10,10 +10,10 @@ namespace EdgarC
     {
 
         private readonly IDownloader _downloader;
-        private readonly ILogger _log;
-        private readonly ILogger _ui;
+        private readonly ILog _log;
+        private readonly ILog _ui;
 
-        public EdgarCManager(IDownloader downloader, ILogger log, ILogger ui)
+        public EdgarCManager(IDownloader downloader, ILog log, ILog ui)
         {
             _downloader = downloader;
             _log = log;
@@ -40,23 +40,22 @@ namespace EdgarC
                 if (!c.Load(new Dictionary<string, object>() { { "SECNumber", r } }))
                 {
                     c.Save();
-                    _ui.Log(LoggingLevel.Info, "+");
-                    Console.Write("+");
+                    _ui.Info("+");
                 }
                 else
                 {
-                    Console.Write(".");
+                    _ui.Info(".");
                 }
 
                 companies.Add(c);
             }
 
             // save companies and forms?
-            Console.WriteLine("Companies complete.");
+            _ui.Info("Companies complete.");
 
             results.ForEach(r =>
             {
-                Console.WriteLine($"result: {r}");
+                _ui.Info($"result: {r}");
                 // save each record.
 
                 var c = companies.First(c1 => c1.SECNumber == r.SECNumber);
@@ -72,15 +71,20 @@ namespace EdgarC
                 if (!f.Load(new Dictionary<string, object>() { { "SECDocumentNumber", r.SECDocumentNumber } }))
                 {
                     f.Save();
-                    Console.Write("+");
+                    _ui.Info("+");
                 }
                 else
                 {
-                    Console.Write(".");
+                    _ui.Info(".");
                 }
 
             });
 
+        }
+
+        public List<Company> CompanySearch(string search)
+        {
+            return Company.GetQueryable<Company>().Where(c => c.Name.Contains(search)).ToList();
         }
     }
 }

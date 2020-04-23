@@ -18,9 +18,9 @@ namespace EdgarC
     {
         private readonly ConfigurationAdapter _configurationAdapter;
         private readonly IFileProvider _fileProvider;
-        private readonly ILogger _log;
+        private readonly ILog _log;
 
-        public Downloader(ConfigurationAdapter configurationAdapter, IFileProvider fileProvider, ILogger log)
+        public Downloader(ConfigurationAdapter configurationAdapter, IFileProvider fileProvider, ILog log)
         {
             _configurationAdapter = configurationAdapter;
             _fileProvider = fileProvider;
@@ -70,6 +70,7 @@ namespace EdgarC
                     {
                         //Console.WriteLine($"Parse error for line {line}: {ex}");
                         //Console.ReadKey();
+                        //_log.Warn($"Parse error for line {line}: {ex}");
                     }
                 }
             }
