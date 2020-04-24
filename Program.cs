@@ -29,7 +29,7 @@ namespace EdgarC
             var menu = new ConsoleMenu(args, level: 0)
                 .Add("Search Companies", () =>
                 {
-                    Console.WriteLine("Enter Company Search Value:");
+                    Console.Write("Enter Company Search Value: ");
                     var search = Console.ReadLine();
                     var ret = em.CompanySearch(search);
 
@@ -39,10 +39,11 @@ namespace EdgarC
                     }
                     else
                     {
-                        Console.WriteLine("Not found.");
+                        Console.Write("Not found...");
+                        Console.ReadKey();
                     }
                 })
-                .Add("Download Quarter", () =>
+                .Add("Download Current Quarter", () =>
                 {
                     em.DownloadQuarterCurrent();
                 })

@@ -36,9 +36,13 @@ namespace EdgarC
 
             foreach (var r in results.Select(r => r.SECNumber).Distinct())
             {
+                var result = results.FirstOrDefault(res => res.SECNumber == r);
+
                 var c = new Company();
+
                 if (!c.Load(new Dictionary<string, object>() { { "SECNumber", r } }))
                 {
+                    c = result.GetCompany();
                     c.Save();
                     _ui.Info("+");
                 }
@@ -84,7 +88,14 @@ namespace EdgarC
 
         public List<Company> CompanySearch(string search)
         {
-            return Company.GetQueryable<Company>().Where(c => c.Name.Contains(search)).ToList();
+            var q = Company.GetQueryable<Company>();
+            Console.WriteLine($"Count: {q.Count()}");
+            var a = q.Skip(10).First();
+            Console.WriteLine($"First: {a.Name}");
+
+            var b = q.Where(c => c.Name.ToUpper().Contains(search.ToUpper())).ToList();
+
+            return Company.GetQueryable<Company>().Where(c => c.Name.ToUpper().Contains(search.ToUpper())).ToList();
         }
     }
 }
